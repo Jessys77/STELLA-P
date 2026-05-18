@@ -25,7 +25,7 @@ if "traspaso_completado" not in st.session_state:
 # ==========================================
 if st.session_state.rol_seleccionado is None:
     st.title("✨ Plataforma Escolar Inteligente")
-    st.subheader("Tecnológico de Estudios Superiores de Huixquilucan")
+    st.subheader("Sistema de Organizacíon Stella")
     st.write("### Selecciona tu perfil de ingreso institucional:")
     st.write("---")
 
@@ -68,7 +68,7 @@ if st.session_state.rol_seleccionado is None:
 # ==========================================
 elif not st.session_state.autenticado:
     st.title(f"🔐 Acceso Restringido - Módulo {st.session_state.rol_seleccionado}")
-    st.write("Introduce tus credenciales del TESH configuradas en el sistema para validar el acceso.")
+    st.write("Introduce tu matricula y contraseña de Stella  configurada en el sistema para validar el acceso.")
     st.write("---")
 
     # Crear un contenedor visual tipo tarjeta para el Login

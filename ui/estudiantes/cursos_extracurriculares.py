@@ -7,7 +7,7 @@ def mostrar_cursos_extracurriculares():
 
     st.write("### 📜 Cursos Registrados")
     st.info("🥇 **Taller de Desarrollo de Videojuegos (Unity):** 2 Créditos - Completado")
-    st.info("♟️ **Torneo de Ajedrez TESH:** 1 Crédito - Completado")
+    st.info("♟️ **Torneo de Ajedrez Stella:** 1 Crédito - Completado")
     st.warning("🌐 **Bootcamp Blockchain (Stellar/Sui):** En proceso de validación")
 
     st.progress(75)

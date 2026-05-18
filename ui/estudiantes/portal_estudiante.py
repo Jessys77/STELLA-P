@@ -20,9 +20,9 @@ from evaluacion_docente import mostrar_evaluacion_docente
 
 
 def mostrar_modulo_estudiante():
-    st.sidebar.markdown("## 🎓 Menú SIE Estudiante")
+    st.sidebar.markdown("## 🎓 Menú Stella Estudiante")
     st.sidebar.write("👤 **Matrícula:** 202213140")
-    st.sidebar.write("🏫 **Plantel:** TESH")
+    st.sidebar.write("🏫 **Stella:** ")
     st.sidebar.write("---")
 
     # MENÚ COMPLETO BASADO EN TU NUEVA PROPUESTA DE ARQUITECTURA
