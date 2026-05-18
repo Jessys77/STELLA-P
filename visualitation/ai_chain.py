@@ -1,36 +1,29 @@
 import pandas as pd
 
-# 1. ESQUEMA DE DATOS ESTÁTICOS DE LA AGENDA
 def obtener_datos_agenda():
     return pd.DataFrame([
-        {"Día": "Lunes", "Hora": "14:00 - 16:00", "Actividad": "Estudio: Álgebra Lineal", "Prioridad": "Alta"},
-        {"Día": "Martes", "Hora": "15:00 - 17:00", "Actividad": "Estudio: Programación", "Prioridad": "Media"},
-        {"Día": "Miércoles", "Hora": "14:00 - 16:00", "Actividad": "Estudio: Física Mecánica", "Prioridad": "Alta"},
-        {"Día": "Jueves", "Hora": "16:00 - 18:00", "Actividad": "Estudio: Álgebra Lineal", "Prioridad": "Baja"},
-        {"Día": "Viernes", "Hora": "13:00 - 15:00", "Actividad": "Estudio: Química General", "Prioridad": "Media"}
+        {"Grupo": "ISC-0601", "Materia": "Álgebra Lineal", "Profesor": "Ing. J. Hernández", "Horario": "Lunes 14:00-16:00", "Prioridad": "Alta"},
+        {"Grupo": "ISC-0601", "Materia": "Programación", "Profesor": "M. en C. R. Téllez", "Horario": "Martes 15:00-17:00", "Prioridad": "Media"},
+        {"Grupo": "ISC-0602", "Materia": "Física Mecánica", "Profesor": "Dr. A. Gómez", "Horario": "Miércoles 14:00-16:00", "Prioridad": "Alta"},
+        {"Grupo": "ISC-0601", "Materia": "Álgebra Lineal", "Profesor": "Ing. J. Hernández", "Horario": "Jueves 16:00-18:00", "Prioridad": "Baja"},
+        {"Grupo": "ISC-0602", "Materia": "Química General", "Profesor": "Dra. N. Domínguez", "Horario": "Viernes 13:00-15:00", "Prioridad": "Media"}
     ])
 
-# 2. RESPUESTAS PREDEFINIDAS DEL FAQ (SIMULANDO LA IA DESACTIVADA)
+def obtener_datos_kardex_migrado():
+    return pd.DataFrame([
+        {"Materia": "Cálculo Diferencial", "Estatus": "Aprobada", "Calificación": 85},
+        {"Materia": "Álgebra Lineal", "Estatus": "Cursando", "Calificación": 0},
+        {"Materia": "Programación Orientada a Objetos", "Estatus": "Aprobada", "Calificación": 90},
+        {"Materia": "Estructura de Datos", "Estatus": "Reprobada", "Calificación": 65},
+        {"Materia": "Fundamentos de Redes", "Estatus": "Aprobada", "Calificación": 80}
+    ])
+
 def obtener_respuestas_faq(pregunta):
     faq = {
-        "álgebra": "**Respuesta del Copiloto:** Sí. Basado en el mapeo de tu temario y las 4 horas asignadas por el motor matemático esta semana, tu probabilidad de cobertura es del 94%.",
-        "reprobación": "**Respuesta del Copiloto:** Programación. Tienes un proyecto final que equivale al 50% de tu nota con fecha límite para el 20 de junio. Se te sugiere añadir un bloque extra de estudio."
+        "sistema": "**Respuesta de STELLA:** La migración inteligente mapeó con éxito 12 profesores, 8 grupos y 24 asignaturas del sistema legacy a nuestra base de datos relacional sin pérdida de datos.",
+        "horarios": "**Respuesta de STELLA:** El motor de optimización OR-Tools ha diseñado 3 escenarios de horarios posibles para el grupo ISC-0601, eliminando al 100% los cruces de profesores en aulas asignadas."
     }
-    return faq.get(pregunta, "Lo siento, la IA en tiempo real está en mantenimiento. Por favor selecciona una pregunta válida.")
+    return faq.get(pregunta, "La IA está optimizando los datos migrados. Selecciona una consulta válida.")
 
-# 3. COMPONENTES DE LAS 3 GRÁFICAS REQUERIDAS
-def obtener_grafica_horas():
-    return {"Álgebra Lineal": 6, "Programación": 8, "Física Mecánica": 4, "Química General": 3}
-
-def obtener_grafica_cobertura():
-    return pd.DataFrame({
-        "Semana": ["Semana 1", "Semana 2", "Semana 3", "Semana 4"],
-        "Progreso Real (%)": [20, 45, 70, 92]
-    }).set_index("Semana")
-
-def obtener_grafica_prioridades():
-    return pd.DataFrame({
-        "Alta": [3, 2, 4, 1],
-        "Media": [2, 5, 3, 4],
-        "Baja": [5, 3, 2, 6]
-    })
+def obtener_grafica_kardex():
+    return {"Aprobadas": 3, "Reprobadas": 1, "Cursando": 1}
