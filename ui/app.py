@@ -25,7 +25,7 @@ if "traspaso_completado" not in st.session_state:
 # ==========================================
 if st.session_state.rol_seleccionado is None:
     st.title("✨ Plataforma Escolar Inteligente")
-    st.subheader("Sistema de Organizacíon Stella")
+    st.subheader("Sistema de Organización Stella")
     st.write("### Selecciona tu perfil de ingreso institucional:")
     st.write("---")
 
