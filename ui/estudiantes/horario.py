@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def mostrar_horario():
-    st.title("🗓️ Propuesta de Horarios Óptimos")
+    st.title(" Propuesta de Horarios Óptimos")
     st.caption("Distribución de carga calculada mediante el optimizador matemático OR-Tools sin choques de grupo.")
 
     df_horario = pd.DataFrame([

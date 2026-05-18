@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def mostrar_evaluacion_docente():
-    st.title("✍️ Evaluación Docente Obligatoria")
+    st.title(" Evaluación Docente Obligatoria")
     st.caption("Tu opinión ayuda a mejorar la asignación inteligente del profesorado.")
 
     profesor = st.selectbox("Seleccione al profesor a evaluar:",
