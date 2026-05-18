@@ -1,0 +1,16 @@
+﻿fastapi>=0.110.0
+uvicorn[standard]
+sqlalchemy[asyncio]>=2.0.0
+asyncpg
+aiosqlite
+pydantic-settings
+python-dotenv
+pandas
+openpyxl
+streamlit
+plotly
+langchain
+langchain-ollama
+ortools
+httpx
+pytest
