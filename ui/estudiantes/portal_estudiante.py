@@ -1,27 +1,22 @@
+import os
+import sys
 import streamlit as st
-import pandas as pd
 
+# MÁGIA DE RUTA SEVERA: Le dice a Python exactamente dónde está parado este archivo
+# y agrega su propia carpeta ('estudiantes') al buscador global de módulos.
+directorio_actual = os.path.dirname(os.path.abspath(__file__))
+if directorio_actual not in sys.path:
+    sys.path.append(directorio_actual)
 
-def obtener_datos_horario_stella():
-    return pd.DataFrame([
-        {"Grupo": "ISC-0601", "Asignatura": "Álgebra Lineal", "Profesor": "Ing. J. Hernández",
-         "Horario": "Lunes 14:00-16:00", "Aula": "Lab C-3"},
-        {"Grupo": "ISC-0601", "Asignatura": "Programación", "Profesor": "M. en C. R. Téllez",
-         "Horario": "Martes 15:00-17:00", "Aula": "Aula 12"},
-        {"Grupo": "ISC-0602", "Asignatura": "Física Mecánica", "Profesor": "Dr. A. Gómez",
-         "Horario": "Miércoles 14:00-16:00", "Aula": "Lab Física"}
-    ])
-
-
-def obtener_datos_kardex_legacy():
-    return pd.DataFrame([
-        {"Clave": "ISC-101", "Asignatura": "Cálculo Diferencial", "Estatus": "Aprobada", "Calificación": 85,
-         "Periodo": "2024-1"},
-        {"Clave": "ISC-102", "Asignatura": "Álgebra Lineal", "Estatus": "Cursando", "Calificación": 0,
-         "Periodo": "2024-2"},
-        {"Clave": "ISC-104", "Asignatura": "Estructura de Datos", "Estatus": "Reprobada", "Calificación": 65,
-         "Periodo": "2024-2"}
-    ])
+# Al hacer lo de arriba, ya podemos importar los archivos DIRECTO por su nombre
+# ¡Sin importar si Streamlit corre desde ui, desde la raíz o desde otra carpeta!
+from datos_generales import mostrar_datos_generales
+from kardex import mostrar_kardex
+from pagos_servicios import mostrar_pago_servicios
+from horario import mostrar_horario
+from calificaciones import mostrar_calificaciones
+from cursos_extracurriculares import mostrar_cursos_extracurriculares
+from evaluacion_docente import mostrar_evaluacion_docente
 
 
 def mostrar_modulo_estudiante():
@@ -30,77 +25,51 @@ def mostrar_modulo_estudiante():
     st.sidebar.write("🏫 **Plantel:** TESH")
     st.sidebar.write("---")
 
-    # Menú lateral interactivo según tus capturas oficiales del portal
+    # MENÚ COMPLETO BASADO EN TU NUEVA PROPUESTA DE ARQUITECTURA
     apartado = st.sidebar.radio(
-        "Seleccione una opción:",
-        ["📌 Estatus de Datos", "📝 Reinscripción", "📊 Calificaciones", "💬 Asistente de Auditoría IA"]
+        "Navegación:",
+        [
+            "👤 Datos Generales",
+            "📜 Kardex",
+            "💳 Pago de Servicios",
+            "🗓️ Horario",
+            "📊 Calificaciones",
+            "🏆 Cursos Extracurriculares",
+            "✍️ Evaluación Docente",
+            "💬 Asistente IA STELLA"
+        ]
     )
 
     st.sidebar.write("---")
     if st.sidebar.button("🔒 Cerrar Sesión Estudiante"):
         st.session_state.rol_seleccionado = None
+        st.session_state.autenticado = False
         st.rerun()
 
-    # ==========================================
-    # APARTADO 1: SEÑALIZACIÓN Y BIENVENIDA (¡ENTRA DIRECTO!)
-    # ==========================================
-    if apartado == "📌 Estatus de Datos":
-        st.title("🎓 Portal del Estudiante Inteligentificado")
-        st.subheader("Bienvenido de vuelta, Alumno del TESH")
-        st.write("---")
+    # ENRUTAMIENTO DINÁMICO
+    if apartado == "👤 Datos Generales":
+        mostrar_datos_generales()
 
-        # SEÑALIZACIÓN EN PRIMERA INSTANCIA SOLICITADA
-        st.success(
-            "🟢 **Señalización de Control Escolar:** Tus datos de revalidación e historial académico han sido registrados correctamente en el nuevo ecosistema inteligente STELLA. Puedes navegar de forma libre por los módulos del menú lateral.")
+    elif apartado == "📜 Kardex":
+        mostrar_kardex()
 
-        # Resumen rápido de datos en la pantalla de inicio
-        st.write("### 📋 Resumen Informativo de Matrícula")
-        col1, col2 = st.columns(2)
-        col1.metric(label="Estatus General", value="Regular")
-        col2.metric(label="Promedio Acumulado Mapeado", value="82.3")
+    elif apartado == "💳 Pago de Servicios":
+        mostrar_pago_servicios()
 
-    # ==========================================
-    # APARTADO 2: REINSCRIPCIÓN (HORARIOS OPTIMIZADOS)
-    # ==========================================
-    elif apartado == "📝 Reinscripción":
-        st.title("📝 Módulo de Reinscripción")
-        st.subheader("Submenú: Elección de Materias & Horarios Disponibles")
-        st.caption("Propuesta de horarios óptimos sin choques entre grupos y profesores calculada con OR-Tools.")
+    elif apartado == "🗓️ Horario":
+        mostrar_horario()
 
-        df_horario = obtener_datos_horario_stella()
-        st.table(df_horario)
-
-        st.download_button(
-            label="📥 Descargar Tira de Materias Propuesta (CSV)",
-            data=df_horario.to_csv(index=False).encode('utf-8'),
-            file_name='horario_sie_estudiante.csv',
-            mime='text/csv'
-        )
-
-    # ==========================================
-    # APARTADO 3: CALIFICACIONES (KARDEX HISTÓRICO Y GRÁFICAS)
-    # ==========================================
     elif apartado == "📊 Calificaciones":
-        st.title("📊 Consulta de Calificaciones")
-        st.subheader("Submenú: Historial Académico / Kardex")
+        mostrar_calificaciones()
 
-        col_g1, col_g2 = st.columns([3, 2])
-        with col_g1:
-            st.write("### Historial Analizado por STELLA")
-            st.dataframe(obtener_datos_kardex_legacy())
+    elif apartado == "🏆 Cursos Extracurriculares":
+        mostrar_cursos_extracurriculares()
 
-        with col_g2:
-            st.write("### Gráficas Estadísticas de Rendimiento")
-            st.caption("1. Conteo de Estatus Académico")
-            st.bar_chart({"Aprobadas": 2, "Reprobadas": 1, "Cursando": 1})
+    elif apartado == "✍️ Evaluación Docente":
+        mostrar_evaluacion_docente()
 
-            st.caption("2. Comportamiento de Calificaciones")
-            st.line_chart([85, 0, 65])
-
-    # ==========================================
-    # APARTADO 4: CHAT DE AUDITORÍA
-    # ==========================================
-    elif apartado == "💬 Asistente de Auditoría IA":
+    elif apartado == "💬 Asistente IA STELLA":
         st.title("💬 Asistente de Auditoría IA")
+        st.caption("Capa de conocimiento analítico del estudiante.")
         st.chat_message("assistant").markdown(
-            "Hola Estudiante. Tus datos del sistema escolar anterior han sido adecuados con éxito. ¿Tienes alguna consulta sobre tus materias o la asignación de tus grupos?")
+            "Hola Jessica. Estoy lista para responder cualquier duda sobre tu avance de créditos, calificaciones en Kardex o tu tira de materias.")

@@ -1,7 +1,7 @@
 ﻿import streamlit as st
 from dotenv import load_dotenv
 
-# IMPORTACIONES DE TUS CARPETAS INDEPENDIENTES
+# Importaciones desde la raíz 'ui'
 from estudiantes.portal_estudiante import mostrar_modulo_estudiante
 from control_escolar.portal_control import mostrar_modulo_control
 from profesores.portal_profesor import mostrar_modulo_profesor
